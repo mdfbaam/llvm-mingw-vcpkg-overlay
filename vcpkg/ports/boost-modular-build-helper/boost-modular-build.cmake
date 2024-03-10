@@ -46,6 +46,9 @@ function(boost_modular_build)
         elseif(VCPKG_PLATFORM_TOOLSET MATCHES "v120")
             set(BOOST_LIB_RELEASE_SUFFIX -vc120-mt.lib)
             set(BOOST_LIB_DEBUG_SUFFIX -vc120-mt-gd.lib)
+		elseif(VCPKG_TARGET_IS_LLVM_MINGW)
+			set(BOOST_LIB_RELEASE_SUFFIX -clang${VCPKG_LLVM_MINGW_TOOLCHAIN_VERSION}-mt.lib)
+			set(BOOST_LIB_DEBUG_SUFFIX -clang${VCPKG_LLVM_MINGW_TOOLCHAIN_VERSION}-mt-d.lib)
         else()
             set(BOOST_LIB_RELEASE_SUFFIX .lib)
             set(BOOST_LIB_DEBUG_SUFFIX d.lib)
@@ -131,7 +134,6 @@ function(boost_modular_build)
             "-DVCPKG_CRT_LINKAGE=${VCPKG_CRT_LINKAGE}"
             "-DVCPKG_CMAKE_VARS_FILE=${cmake_vars_file}"
             "-DVCPKG_CONCURRENCY=${VCPKG_CONCURRENCY}"
-			"-DVCPKG_TARGET_IS_LLVM_MINGW=${VCPKG_TARGET_IS_LLVM_MINGW}"
             ${configure_options}
         MAYBE_UNUSED_VARIABLES
             FEATURES

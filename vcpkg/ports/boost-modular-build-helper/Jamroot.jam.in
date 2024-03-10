@@ -60,8 +60,6 @@ if "@PORT@" != "boost-regex"
 
     lib boost_regex : : <file>"@CURRENT_INSTALLED_DIR@/lib/@BOOST_LIB_PREFIX@boost_regex@BOOST_LIB_RELEASE_SUFFIX@" <variant>release ;
     lib boost_regex : : <file>"@CURRENT_INSTALLED_DIR@/debug/lib/@BOOST_LIB_PREFIX@boost_regex@BOOST_LIB_DEBUG_SUFFIX@" <variant>debug ;
-	lib boost_regex : : <file>"@CURRENT_INSTALLED_DIR@/lib/@BOOST_LIB_PREFIX@boost_regex@BOOST_LIB_RELEASE_SUFFIX@" <variant>release <link>static ;
-    lib boost_regex : : <file>"@CURRENT_INSTALLED_DIR@/debug/lib/@BOOST_LIB_PREFIX@boost_regex@BOOST_LIB_DEBUG_SUFFIX@" <variant>debug <link>static [[;
     explicit boost_regex ;
 }
 
