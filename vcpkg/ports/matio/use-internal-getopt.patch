@@ -1,0 +1,21 @@
+diff --git a/cmake/compilerOptions.cmake b/cmake/compilerOptions.cmake
+index 71938ab..5241ddd 100644
+--- a/cmake/compilerOptions.cmake
++++ b/cmake/compilerOptions.cmake
+@@ -5,7 +5,6 @@ check_symbol_exists(snprintf   stdio.h  HAVE_SNPRINTF)
+ check_symbol_exists(vasprintf  stdio.h  HAVE_VASPRINTF)
+ check_symbol_exists(asprintf   stdio.h  HAVE_ASPRINTF)
+ check_symbol_exists(strcasecmp "strings.h;string.h" HAVE_STRCASECMP)
+-check_symbol_exists(getopt     unistd.h HAVE_GETOPT)
+ check_symbol_exists(va_copy    stdarg.h HAVE_VA_COPY)
+ check_symbol_exists(__va_copy  stdarg.h HAVE___VA_COPY)
+ check_symbol_exists(localeconv locale.h HAVE_LOCALECONV)
+@@ -16,6 +15,8 @@ check_symbol_exists(ftello64   stdio.h  HAVE_FTELLO64)
+ check_symbol_exists(_fseeki64  stdio.h  HAVE__FSEEKI64)
+ check_symbol_exists(_ftelli64  stdio.h  HAVE__FTELLI64)
+ 
++set(HAVE_GETOPT FALSE)
++
+ include(CheckIncludeFile)
+ check_include_file(inttypes.h HAVE_INTTYPES_H)
+ check_include_file(stdint.h   HAVE_STDINT_H)

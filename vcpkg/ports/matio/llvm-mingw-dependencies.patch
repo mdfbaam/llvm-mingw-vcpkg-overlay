@@ -1,0 +1,13 @@
+diff --git a/cmake/src.cmake b/cmake/src.cmake
+index 128ee35..7793669 100644
+--- a/cmake/src.cmake
++++ b/cmake/src.cmake
+@@ -68,7 +68,7 @@ if(STDINT_MSVC)
+ endif()
+ 
+ if(HAVE_LIBM)
+-    target_link_libraries(${PROJECT_NAME} PUBLIC m c)
++    target_link_libraries(${PROJECT_NAME} PUBLIC m)
+ endif()
+ 
+ if(MSVC)

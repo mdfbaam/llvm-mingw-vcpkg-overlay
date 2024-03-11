@@ -1,0 +1,13 @@
+diff --git a/src/network/socket/qnativesocketengine_p.h b/src/network/socket/qnativesocketengine_p.h
+index 4ee9764e..76bab027 100644
+--- a/src/network/socket/qnativesocketengine_p.h
++++ b/src/network/socket/qnativesocketengine_p.h
+@@ -151,7 +151,7 @@ public:
+     void setSendBufferSize(qint64 bufferSize);
+ #endif
+ 
+-    int option(SocketOption option) const override;
++    int option(SocketOption option) const;
+     bool setOption(SocketOption option, int value) override;
+ 
+     bool waitForRead(int msecs = 30000, bool *timedOut = nullptr) override;
