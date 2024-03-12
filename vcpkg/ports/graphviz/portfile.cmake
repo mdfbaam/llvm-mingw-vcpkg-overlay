@@ -14,6 +14,9 @@ vcpkg_from_gitlab(
         no-absolute-paths.patch
         select-plugins.patch
         static-linkage.patch
+		fix-xmax-clobber-glib.patch
+		fix-llvm-mingw-libs.patch
+		libs-only.patch
 )
 
 if(VCPKG_TARGET_IS_OSX)
@@ -78,51 +81,51 @@ file(REMOVE_RECURSE
     "${CURRENT_PACKAGES_DIR}/share/man"
 )
 
-file(MAKE_DIRECTORY "${CURRENT_PACKAGES_DIR}/tools/${PORT}")
-foreach(script_or_link IN ITEMS "dot2gxl${VCPKG_TARGET_EXECUTABLE_SUFFIX}" gvmap.sh)
-    if(EXISTS "${CURRENT_PACKAGES_DIR}/bin/${script_or_link}")
-        file(RENAME "${CURRENT_PACKAGES_DIR}/bin/${script_or_link}" "${CURRENT_PACKAGES_DIR}/tools/${PORT}/${script_or_link}")
-        file(REMOVE "${CURRENT_PACKAGES_DIR}/debug/bin/${script_or_link}")
-    endif()
-endforeach()
-vcpkg_copy_tools(
-    TOOL_NAMES
-        acyclic
-        bcomps
-        ccomps
-        circo
-        cluster
-        diffimg
-        dijkstra
-        dot
-        dot_builtins
-        edgepaint
-        fdp
-        gc
-        gml2gv
-        graphml2gv
-        gv2gml
-        gv2gxl
-        gvcolor
-        gvgen
-        gvmap
-        gvpack
-        gvpr
-        gxl2dot
-        gxl2gv
-        mm2gv
-        neato
-        nop
-        osage
-        patchwork
-        prune
-        sccmap
-        sfdp
-        tred
-        twopi
-        unflatten
-    AUTO_CLEAN
-)
+#file(MAKE_DIRECTORY "${CURRENT_PACKAGES_DIR}/tools/${PORT}")
+#foreach(script_or_link IN ITEMS "dot2gxl${VCPKG_TARGET_EXECUTABLE_SUFFIX}" gvmap.sh)
+#    if(EXISTS "${CURRENT_PACKAGES_DIR}/bin/${script_or_link}")
+#        file(RENAME "${CURRENT_PACKAGES_DIR}/bin/${script_or_link}" "${CURRENT_PACKAGES_DIR}/tools/${PORT}/${script_or_link}")
+#        file(REMOVE "${CURRENT_PACKAGES_DIR}/debug/bin/${script_or_link}")
+#    endif()
+#endforeach()
+# vcpkg_copy_tools(
+    # TOOL_NAMES
+        # acyclic
+        # bcomps
+        # ccomps
+        # circo
+        # cluster
+        # diffimg
+        # dijkstra
+        # dot
+        # dot_builtins
+        # edgepaint
+        # fdp
+        # gc
+        # gml2gv
+        # graphml2gv
+        # gv2gml
+        # gv2gxl
+        # gvcolor
+        # gvgen
+        # gvmap
+        # gvpack
+        # gvpr
+        # gxl2dot
+        # gxl2gv
+        # mm2gv
+        # neato
+        # nop
+        # osage
+        # patchwork
+        # prune
+        # sccmap
+        # sfdp
+        # tred
+        # twopi
+        # unflatten
+    # AUTO_CLEAN
+# )
 
 file(GLOB plugin_config "${CURRENT_PACKAGES_DIR}/lib/graphviz/config*" "${CURRENT_PACKAGES_DIR}/bin/config*")
 if(NOT plugin_config)
@@ -132,11 +135,11 @@ if(NOT plugin_config)
     )
 endif()
 
-if(VCPKG_TARGET_IS_WINDOWS)
-    file(GLOB plugins "${CURRENT_PACKAGES_DIR}/bin/gvplugin_*")
-    file(COPY ${plugins} ${plugin_config} DESTINATION "${CURRENT_PACKAGES_DIR}/tools/${PORT}")
-else()
-    file(COPY "${CURRENT_PACKAGES_DIR}/lib/graphviz" DESTINATION "${CURRENT_PACKAGES_DIR}/tools/${PORT}")
-endif()
+#if(VCPKG_TARGET_IS_WINDOWS)
+#    file(GLOB plugins "${CURRENT_PACKAGES_DIR}/bin/gvplugin_*")
+#    file(COPY ${plugins} ${plugin_config} DESTINATION "${CURRENT_PACKAGES_DIR}/tools/${PORT}")
+#else()
+#    file(COPY "${CURRENT_PACKAGES_DIR}/lib/graphviz" DESTINATION "${CURRENT_PACKAGES_DIR}/tools/${PORT}")
+#endif()
 
 vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")

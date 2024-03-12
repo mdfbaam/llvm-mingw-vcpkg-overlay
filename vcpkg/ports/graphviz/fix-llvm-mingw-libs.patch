@@ -1,0 +1,14 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 77ade77..cf1562d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -148,6 +148,9 @@ if(UNIX)
+   link_libraries(${MATH_LIB})
+ endif()
+ 
++find_library(INTL_LIB intl)
++link_libraries(${INTL_LIB})
++
+ if(WIN32)
+   # Find Windows specific dependencies
+ 

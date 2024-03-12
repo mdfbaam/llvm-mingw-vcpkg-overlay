@@ -1,0 +1,12 @@
+diff --git a/src/entrypoint/EntryPointMinGW32Target.cmake.in b/src/entrypoint/EntryPointMinGW32Target.cmake.in
+index 81ee970d..583cd24b 100644
+--- a/src/entrypoint/EntryPointMinGW32Target.cmake.in
++++ b/src/entrypoint/EntryPointMinGW32Target.cmake.in
+@@ -1,6 +1,6 @@
+ # Add EntryPointMinGW32, an imported library that ensures that -lmingw32 comes before
+ # EntryPointImplementation on the linker command line.
+-include_guard()
++include_guard(GLOBAL)
+ add_library(EntryPointMinGW32 INTERFACE IMPORTED)
+ set_property(TARGET EntryPointMinGW32 PROPERTY IMPORTED_LIBNAME mingw32)
+ target_link_libraries(EntryPointMinGW32

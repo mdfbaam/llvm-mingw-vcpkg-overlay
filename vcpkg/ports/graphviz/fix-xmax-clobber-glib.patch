@@ -1,0 +1,144 @@
+diff --git a/lib/neatogen/adjust.c b/lib/neatogen/adjust.c
+index e4f9918..764aae5 100644
+--- a/lib/neatogen/adjust.c
++++ b/lib/neatogen/adjust.c
+@@ -1,5 +1,5 @@
+ /*************************************************************************
+- * Copyright (c) 2011 AT&T Intellectual Property 
++ * Copyright (c) 2011 AT&T Intellectual Property
+  * All rights reserved. This program and the accompanying materials
+  * are made available under the terms of the Eclipse Public License v1.0
+  * which accompanies this distribution, and is available at
+@@ -86,7 +86,7 @@ static void freeNodes(void)
+ /* chkBoundBox:
+  *   Compute extremes of graph, then set up bounding box.
+  *   If user supplied a bounding box, use that;
+- *   else if "window" is a graph attribute, use that; 
++ *   else if "window" is a graph attribute, use that;
+  *   otherwise, define bounding box as a percentage expansion of
+  *   graph extremes.
+  *   In the first two cases, check that graph fits in bounding box.
+@@ -126,7 +126,7 @@ static void chkBoundBox(Agraph_t * graph)
+ }
+ 
+  /* makeInfo:
+-  * For each node in the graph, create a Info data structure 
++  * For each node in the graph, create a Info data structure
+   */
+ static int makeInfo(Agraph_t * graph)
+ {
+@@ -150,7 +150,7 @@ static int makeInfo(Agraph_t * graph)
+ 	pmargin.x = PS2INCH(pmargin.x);
+ 	pmargin.y = PS2INCH(pmargin.y);
+     }
+-	
++
+     else polyf = makePoly;
+     for (size_t i = 0; i < nsites; i++) {
+ 	Info_t *ip = &nodeInfo[i];
+@@ -222,17 +222,17 @@ static void geomUpdate(int doSort)
+ 
+     /* compute ranges */
+     xmin = DBL_MAX;
+-    xmax = -DBL_MAX;
++    gv_xmax = -DBL_MAX;
+     assert(nsites > 0);
+     for (size_t i = 0; i < nsites; ++i) {
+ 	xmin = fmin(xmin, sites[i]->coord.x);
+-	xmax = fmax(xmax, sites[i]->coord.x);
++	gv_xmax = fmax(gv_xmax, sites[i]->coord.x);
+     }
+     ymin = sites[0]->coord.y;
+     ymax = sites[nsites - 1]->coord.y;
+ 
+     deltay = ymax - ymin;
+-    deltax = xmax - xmin;
++    deltax = gv_xmax - xmin;
+ }
+ 
+ static Site *nextOne(void)
+@@ -714,7 +714,7 @@ static void fdpAdjust(graph_t *g, adjust_data *am) {
+ 	A = SparseMatrix_remove_diagonal(A);
+     }
+ 
+-    remove_overlap(Ndim, A, pos, sizes, am->value, am->scaling, 
++    remove_overlap(Ndim, A, pos, sizes, am->value, am->scaling,
+                    ELSCHEME_NONE, 0, NULL, NULL,
+                    mapBool(agget(g, "overlap_shrink"), true));
+ 
+@@ -916,7 +916,7 @@ static const lookup_t adjustMode[] = {
+     {AM_NONE, 0, 0, 0}
+ };
+ 
+-    
++
+ /* setPrismValues:
+  * Initialize and set prism values
+  */
+@@ -993,7 +993,7 @@ adjust_data *graphAdjustMode(graph_t *G, adjust_data* dp, char* dflt)
+ 
+ /* simpleScaling:
+  */
+-static int simpleScale (graph_t* g) 
++static int simpleScale (graph_t* g)
+ {
+     pointf sc;
+     node_t* n;
+@@ -1023,7 +1023,7 @@ static int simpleScale (graph_t* g)
+  * node overlaps.
+  * Return non-zero if nodes are moved.
+  */
+-int 
++int
+ removeOverlapWith (graph_t * G, adjust_data* am)
+ {
+     int ret, nret;
+@@ -1121,7 +1121,7 @@ removeOverlapWith (graph_t * G, adjust_data* am)
+  * Use flag value to determine if and how to remove
+  * node overlaps.
+  */
+-int 
++int
+ removeOverlapAs(graph_t * G, char* flag)
+ {
+     adjust_data am;
+diff --git a/lib/neatogen/geometry.c b/lib/neatogen/geometry.c
+index b8130e3..fd6b60d 100644
+--- a/lib/neatogen/geometry.c
++++ b/lib/neatogen/geometry.c
+@@ -1,5 +1,5 @@
+ /*************************************************************************
+- * Copyright (c) 2011 AT&T Intellectual Property 
++ * Copyright (c) 2011 AT&T Intellectual Property
+  * All rights reserved. This program and the accompanying materials
+  * are made available under the terms of the Eclipse Public License v1.0
+  * which accompanies this distribution, and is available at
+@@ -14,7 +14,7 @@
+ 
+ Point origin = { 0, 0 };
+ 
+-double xmin, xmax, ymin, ymax;	/* min and max x and y values of sites */
++double xmin, gv_xmax, ymin, ymax;	/* min and max x and y values of sites */
+ double deltax,			/* xmax - xmin */
+  deltay;			/* ymax - ymin */
+ 
+diff --git a/lib/neatogen/geometry.h b/lib/neatogen/geometry.h
+index 7e6f6f3..334b745 100644
+--- a/lib/neatogen/geometry.h
++++ b/lib/neatogen/geometry.h
+@@ -1,5 +1,5 @@
+ /*************************************************************************
+- * Copyright (c) 2011 AT&T Intellectual Property 
++ * Copyright (c) 2011 AT&T Intellectual Property
+  * All rights reserved. This program and the accompanying materials
+  * are made available under the terms of the Eclipse Public License v1.0
+  * which accompanies this distribution, and is available at
+@@ -26,7 +26,7 @@ extern "C" {
+ 
+     extern Point origin;
+ 
+-    extern double xmin, xmax, ymin, ymax;	/* extreme x,y values of sites */
++    extern double xmin, gv_xmax, ymin, ymax;	/* extreme x,y values of sites */
+     extern double deltax, deltay;	/* xmax - xmin, ymax - ymin */
+ 
+     extern size_t nsites; // Number of sites

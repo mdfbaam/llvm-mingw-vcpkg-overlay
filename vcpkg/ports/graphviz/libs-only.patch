@@ -1,0 +1,24 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 77ade77..fdbea50 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -286,13 +286,13 @@ include(CPack)
+ include(CTest)
+ 
+ # ======================= Specify subdirectories to build ======================
+-add_subdirectory(contrib/diffimg)
+-add_subdirectory(contrib/prune)
+-add_subdirectory(graphs)
++#add_subdirectory(contrib/diffimg)
++#add_subdirectory(contrib/prune)
++#add_subdirectory(graphs)
+ add_subdirectory(lib)
+-add_subdirectory(plugin)
+-add_subdirectory(cmd)
+-add_subdirectory(share)
++#add_subdirectory(plugin)
++#add_subdirectory(cmd)
++#add_subdirectory(share)
+ if(with_cxx_tests)
+   add_subdirectory(tests)
+ endif()
