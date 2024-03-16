@@ -1,0 +1,52 @@
+diff --git a/gettext-runtime/intl/Makefile.am b/gettext-runtime/intl/Makefile.am
+index 2bed67b..1da481a 100644
+--- a/gettext-runtime/intl/Makefile.am
++++ b/gettext-runtime/intl/Makefile.am
+@@ -430,7 +430,7 @@ libgnuintl_la_DEPENDENCIES = gnulib-lib/libgnu.la $(WOE32_LIBADD)
+ # langprefs.c (_nl_language_preferences_win32_95) uses functions from
+ # advapi32.dll.
+ if WINDOWS_NATIVE
+-INTL_WINDOWS_LIBS = -ladvapi32
++INTL_WINDOWS_LIBS =
+ else
+ INTL_WINDOWS_LIBS =
+ endif
+diff --git a/gettext-runtime/intl/Makefile.in b/gettext-runtime/intl/Makefile.in
+index ff2a90b..4923957 100644
+--- a/gettext-runtime/intl/Makefile.in
++++ b/gettext-runtime/intl/Makefile.in
+@@ -1874,7 +1874,7 @@ libgnuintl_la_DEPENDENCIES = gnulib-lib/libgnu.la $(WOE32_LIBADD)
+ 
+ # langprefs.c (_nl_language_preferences_win32_95) uses functions from
+ # advapi32.dll.
+-@WINDOWS_NATIVE_TRUE@INTL_WINDOWS_LIBS = -ladvapi32
++@WINDOWS_NATIVE_TRUE@INTL_WINDOWS_LIBS = 
+ 
+ # Libtool's library version information for libintl.
+ # Before making a gettext release, you must change this according to the
+diff --git a/gettext-tools/configure b/gettext-tools/configure
+index 5ce6cf1..907ada4 100644
+--- a/gettext-tools/configure
++++ b/gettext-tools/configure
+@@ -62461,7 +62461,7 @@ printf "%s\n" "#define HAVE_LIB_BCRYPT 1" >>confdefs.h
+ 
+         GETRANDOM_LIB='-lbcrypt'
+       else
+-        GETRANDOM_LIB='-ladvapi32'
++        GETRANDOM_LIB=''
+       fi
+       ;;
+     *)
+diff --git a/gettext-tools/gnulib-m4/getrandom.m4 b/gettext-tools/gnulib-m4/getrandom.m4
+index 0f7d602..0d2a7aa 100644
+--- a/gettext-tools/gnulib-m4/getrandom.m4
++++ b/gettext-tools/gnulib-m4/getrandom.m4
+@@ -69,7 +69,7 @@ AC_DEFUN([gl_FUNC_GETRANDOM],
+           [Define to 1 if the bcrypt library is guaranteed to be present.])
+         GETRANDOM_LIB='-lbcrypt'
+       else
+-        GETRANDOM_LIB='-ladvapi32'
++        GETRANDOM_LIB=''
+       fi
+       ;;
+     *)

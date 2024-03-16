@@ -1,0 +1,51 @@
+diff --git a/glib/gconvert.c b/glib/gconvert.c
+index 829fe38de..e01ad8884 100644
+--- a/glib/gconvert.c
++++ b/glib/gconvert.c
+@@ -32,7 +32,8 @@
+ #include <stdlib.h>
+ 
+ #ifdef G_OS_WIN32
+-#include "win_iconv.c"
++#define USE_LIBICONV_GNU
++#include <iconv.h>
+ #endif
+ 
+ #ifdef G_PLATFORM_WIN32
+diff --git a/meson.build b/meson.build
+index d465253af..34ce69e4d 100644
+--- a/meson.build
++++ b/meson.build
+@@ -2038,7 +2038,8 @@ glibconfig_conf.set10('G_HAVE_GROWING_STACK', growing_stack)
+ if host_system == 'windows'
+   # We have a #include "win_iconv.c" in gconvert.c on Windows, so we don't need
+   # any external library for it
+-  libiconv = []
++  libiconv = [cc.find_library('iconv')]
++  found_iconv = true
+ else
+   libiconv = dependency('iconv')
+ endif
+
+diff --git a/gio/meson.build b/gio/meson.build
+index f9fdf6e..1a8f0f5 100644
+--- a/gio/meson.build
++++ b/gio/meson.build
+@@ -849,7 +849,7 @@ libgio = library('gio-2.0',
+   dependencies : [libz_dep, libdl_dep, libmount_dep, libglib_dep,
+                   libgobject_dep, libgmodule_dep, selinux_dep, xattr_dep,
+                   platform_deps, network_libs, libsysprof_capture_dep,
+-                  gioenumtypes_dep, gvdb_dep],
++                  gioenumtypes_dep, gvdb_dep, libiconv],
+   c_args : [gio_c_args, gio_c_args_internal],
+   objc_args : [gio_c_args, gio_c_args_internal],
+   gnu_symbol_visibility : 'hidden',
+@@ -867,7 +867,7 @@ schemas_subdir = join_paths('glib-2.0', 'schemas')
+ dtds_subdir = join_paths('glib-2.0', 'dtds')
+ 
+ libgio_dep = declare_dependency(link_with : libgio,
+-  dependencies : [libgmodule_dep, libgobject_dep, gioenumtypes_dep],
++  dependencies : [libgmodule_dep, libgobject_dep, gioenumtypes_dep, libiconv],
+   include_directories : [gioinc],
+   variables : [
+     'schemasdir=' + join_paths(glib_datadir, schemas_subdir),

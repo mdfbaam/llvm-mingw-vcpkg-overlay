@@ -1,0 +1,22 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 52dc7bf..d034e46 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1563,7 +1563,7 @@ if(NOT HAVE_GETOPT_LONG)
+     )
+ endif()
+ 
+-
++if(BUILD_TOOLS)
+ #############################################################################
+ # xzdec and lzmadec
+ #############################################################################
+@@ -1909,7 +1909,7 @@ if(NOT MSVC OR MSVC_VERSION GREATER_EQUAL 1900)
+         my_install_man(xz_Documentation src/xz/xz.1 "${XZ_LINKS}")
+     endif()
+ endif()
+-
++endif()
+ 
+ #############################################################################
+ # Scripts

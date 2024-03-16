@@ -1,0 +1,26 @@
+diff --git a/Makefile.am b/Makefile.am
+index 3de0bea..7e04900 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -119,7 +119,7 @@ endif
+ 
+ if LIBFFI_BUILD_VERSIONED_SHLIB
+ if LIBFFI_BUILD_VERSIONED_SHLIB_GNU
+-libffi_version_script = -Wl,--version-script,libffi.map
++libffi_version_script =
+ libffi_version_dep = libffi.map
+ endif
+ if LIBFFI_BUILD_VERSIONED_SHLIB_SUN
+diff --git a/Makefile.in b/Makefile.in
+index 66308b7..cfc5e91 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -613,7 +613,7 @@ nodist_libffi_convenience_la_SOURCES = $(nodist_libffi_la_SOURCES)
+ LTLDFLAGS = $(shell $(SHELL) $(top_srcdir)/libtool-ldflags $(LDFLAGS))
+ AM_CFLAGS = $(am__append_3)
+ @LIBFFI_BUILD_VERSIONED_SHLIB_FALSE@libffi_version_script = 
+-@LIBFFI_BUILD_VERSIONED_SHLIB_GNU_TRUE@@LIBFFI_BUILD_VERSIONED_SHLIB_TRUE@libffi_version_script = -Wl,--version-script,libffi.map
++@LIBFFI_BUILD_VERSIONED_SHLIB_GNU_TRUE@@LIBFFI_BUILD_VERSIONED_SHLIB_TRUE@libffi_version_script = 
+ @LIBFFI_BUILD_VERSIONED_SHLIB_SUN_TRUE@@LIBFFI_BUILD_VERSIONED_SHLIB_TRUE@libffi_version_script = -Wl,-M,libffi.map-sun
+ @LIBFFI_BUILD_VERSIONED_SHLIB_FALSE@libffi_version_dep = 
+ @LIBFFI_BUILD_VERSIONED_SHLIB_GNU_TRUE@@LIBFFI_BUILD_VERSIONED_SHLIB_TRUE@libffi_version_dep = libffi.map
