@@ -1,0 +1,13 @@
+diff --git a/Common/Core/vtkCompiler.h b/Common/Core/vtkCompiler.h
+index 48511f76..ff95d498 100644
+--- a/Common/Core/vtkCompiler.h
++++ b/Common/Core/vtkCompiler.h
+@@ -47,7 +47,7 @@
+ #endif
+ 
+ /** extern template declarations for C++11. */
+-#define VTK_USE_EXTERN_TEMPLATE
++//#define VTK_USE_EXTERN_TEMPLATE
+ 
+ #endif
+ 
